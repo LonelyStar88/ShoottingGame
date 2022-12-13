@@ -23,11 +23,16 @@ public class Player : MonoBehaviour
     private SpriteRenderer sr;
 
     private float speed = 3f;
+
+    [SerializeField]
+    private Bullet bullet;
     // Start is called before the first frame update
     void Start()
     {
         dir = Direction.Center;
         GetComponent<SpriteAnimation>().SetSprite(centerSP, 0.2f);
+
+        bullet.Initialize();
     }
 
     // Update is called once per frame

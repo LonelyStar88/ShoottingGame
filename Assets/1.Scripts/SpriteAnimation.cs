@@ -20,7 +20,7 @@ public class SpriteAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (sprites == null)
+        if (sprites.Count == 0)
             return;
 
         delayTime += Time.deltaTime;
