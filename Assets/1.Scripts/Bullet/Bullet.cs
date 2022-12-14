@@ -44,23 +44,32 @@ public abstract class Bullet : MonoBehaviour
             {
                 item.transform.Translate(new Vector2(0f, Time.deltaTime * bd.speed));
             }
-                // 총알이 밖으로 나갔을 시 삭제
-                for (int i = bullets.Count - 1; i >= 0; i--)
-                {
-                    if (bullets[i].transform.position.y >= 10f)
-                    {
-                        Destroy(bullets[i]);
-                        bullets.RemoveAt(i);
-                    }
-                }
-            
+            RemoveBullet();
+
         }
         // 적들의 총알일 경우
         else
         {
-
+            foreach (var item in bullets)
+            {
+                item.transform.Translate(new Vector2(0f, Time.deltaTime * (bd.speed * -1)));
+            }
+            RemoveBullet();
         }
         
+    }
+
+    void RemoveBullet()
+    {
+        // 총알이 밖으로 나갔을 시 삭제
+        for (int i = bullets.Count - 1; i >= 0; i--)
+        {
+            if (bullets[i].transform.position.y <= -10f)
+            {
+                Destroy(bullets[i]);
+                bullets.RemoveAt(i);
+            }
+        }
     }
 
     void Update()

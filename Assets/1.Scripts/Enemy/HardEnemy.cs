@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EasyEnemy : Enemy
+public class HardEnemy : Enemy
 {
     [SerializeField]
     private GameObject[] items;
     public override void Initialize()
     {
         ed.obj = gameObject;
-        ed.curHP = 1f;
-        ed.maxHP = 1f;
-        ed.speed = 1f;
-        ed.score = 1;
+        ed.curHP = 200f;
+        ed.maxHP = 200f;
+        ed.speed = 0.2f;
+        ed.score = 50;
         ed.itemObjs = items;
     }
     public override void Move()
@@ -23,14 +23,5 @@ public class EasyEnemy : Enemy
     public override void Damage(float damage)
     {
         base.Damage(damage);
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if(other.tag.Equals("pBullet"))
-        {
-            Damage(0.5f);
-            
-        }
     }
 }

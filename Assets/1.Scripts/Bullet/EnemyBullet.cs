@@ -21,4 +21,16 @@ public class EnemyBullet : Bullet
         bd.isPlayer = false;
         bd.tempParent = tempParent;
     }
+
+    public void SetTempParent(Transform trans)
+    {
+        tempParent = trans;
+    }
+
+    /*
+    void Update()
+    {
+        transform.LookAt(GameObject.FindWithTag("Player").transform);
+    }*/
+    
 }

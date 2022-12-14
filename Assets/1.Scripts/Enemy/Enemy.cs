@@ -27,7 +27,7 @@ public abstract class Enemy : MonoBehaviour
 
         ed.obj.transform.Translate(new Vector2(0f, Time.deltaTime * ed.speed * -1));
 
-        if (ed.obj.transform.position.y >= 10)
+        if (ed.obj.transform.position.y <= -16)
         {
             Destroy(gameObject);
         }
