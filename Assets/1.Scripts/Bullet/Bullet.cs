@@ -8,11 +8,14 @@ public struct BulletData
     public float speed;
     public float delay;
     public bool isPlayer;
+    
 
     public Transform parent;
     public GameObject prefab;
 
     public Transform tempParent;
+
+    public Transform posParent;
 }
 
 public abstract class Bullet : MonoBehaviour
@@ -28,7 +31,18 @@ public abstract class Bullet : MonoBehaviour
     
     public virtual void CreateBullet()
     {
-        GameObject obj = Instantiate(bd.prefab, bd.parent);
+        GameObject obj = Instantiate(bd.prefab, bd.posParent);
+        
+
+        if(!bd.isPlayer)
+        {
+            obj.GetComponent<EnemyParent>().posParentTrans = bd.posParent;
+            obj.GetComponent<EnemyParent>().enemyTrans = bd.parent;
+        }
+        else
+        {
+            obj.GetComponent<MyBulletCol>().SetDamage(bd.damage);
+        }
         obj.transform.SetParent(null);
         bullets.Add(obj);
     }
@@ -59,16 +73,25 @@ public abstract class Bullet : MonoBehaviour
         
     }
 
-    void RemoveBullet()
+    public virtual void RemoveBullet(GameObject bullet = null)
     {
         // 총알이 밖으로 나갔을 시 삭제
         for (int i = bullets.Count - 1; i >= 0; i--)
         {
-            if (bullets[i].transform.position.y <= -10f)
+            if(bullet != null)
             {
-                Destroy(bullets[i]);
-                bullets.RemoveAt(i);
+                if(bullet.Equals(bullets[i]))
+                {
+                    Destroy(bullets[i]);
+                    bullets.RemoveAt(i);
+                }
             }
+            else if(bullets[i].transform.position.y <= -10f)
+            {
+                    Destroy(bullets[i]);
+                    bullets.RemoveAt(i);
+            }
+            
         }
     }
 

@@ -59,4 +59,23 @@ public class Player : MonoBehaviour
         }
         
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+       
+        if(collision.tag.Equals("eBullet"))
+        {
+            collision.GetComponent<EnemyParent>()
+                .posParentTrans.GetComponent<EnemyBullet>()
+                .RemoveBullet(collision.gameObject);
+            //collision.GetComponent<EnemyBullet>().RemoveBullet();
+        }
+        else if(collision.tag.Equals("Enemy"))
+        {
+            
+            collision.GetComponent<EasyEnemy>();
+            return;
+            //Destroy(gameObject);
+        }
+    }
 }

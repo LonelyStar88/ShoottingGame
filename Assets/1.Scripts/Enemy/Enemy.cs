@@ -25,11 +25,14 @@ public abstract class Enemy : MonoBehaviour
         if (ed.speed == 0)
             return;
 
+        if (ed.obj == null)
+            return;
+
         ed.obj.transform.Translate(new Vector2(0f, Time.deltaTime * ed.speed * -1));
 
         if (ed.obj.transform.position.y <= -16)
         {
-            Destroy(gameObject);
+            Delete();
         }
     }
     
@@ -41,10 +44,15 @@ public abstract class Enemy : MonoBehaviour
         if(ed.curHP <= 0)
         {
             Debug.Log("Æ÷ÀÎÆ® È¹µæ");
-            Destroy(ed.obj);
+            Delete();
         }
     }
 
+    void Delete()
+    {
+        Destroy(ed.obj);
+        ed.obj = null;
+    }
     
     
 }

@@ -25,12 +25,13 @@ public class EasyEnemy : Enemy
         base.Damage(damage);
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(other.tag.Equals("pBullet"))
+        if (collision.tag.Equals("pBullet"))
         {
             Damage(0.5f);
             
+
         }
     }
 }

@@ -16,11 +16,15 @@ public class MyBullet : Bullet
         bd.damage = 1;
         bd.delay = 1f;
         bd.speed = 3f;
-        bd.parent = transform;
+        bd.posParent = parent;
         bd.prefab = prefab;
         bd.isPlayer = true;
         bd.tempParent = tempParent;
     }
-    
-    
+
+    public override void RemoveBullet(GameObject bullet)
+    {
+        base.RemoveBullet(bullet);
+    }
+
 }
