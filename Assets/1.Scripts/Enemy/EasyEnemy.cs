@@ -6,6 +6,15 @@ public class EasyEnemy : Enemy
 {
     [SerializeField]
     private GameObject[] items;
+
+    [HideInInspector]
+    public Transform firePosTrans;
+
+    [SerializeField]
+    private EnemyBullet bullet;
+    [SerializeField]
+    private Transform TempParent;
+
     public override void Initialize()
     {
         ed.obj = gameObject;
@@ -14,7 +23,12 @@ public class EasyEnemy : Enemy
         ed.speed = 1f;
         ed.score = 1;
         ed.itemObjs = items;
+        firePosTrans = transform.GetChild(0).transform;
+
+        InvokeRepeating("BulletCreate", 2f, 5f); // BulleCreate 함수를2초뒤에 5초마다 실행
     }
+
+    
     public override void Move()
     {
         base.Move();
@@ -23,15 +37,25 @@ public class EasyEnemy : Enemy
     public override void Damage(float damage)
     {
         base.Damage(damage);
-    }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag.Equals("pBullet"))
+        if(ed.curHP <= 0)
         {
-            Damage(0.5f);
-            
-
+            CancelInvoke("BulletCreate");
         }
     }
+
+    public override void BulletCreate()
+    {
+
+        EnemyBullet eb = Instantiate(bullet, firePosTrans);
+        eb.SetTempParent(TempParent);
+        eb.Initialize();
+    }
+
+    public override void SetTempParent(Transform trans)
+    {
+        TempParent = trans;
+    }
+
+   
 }

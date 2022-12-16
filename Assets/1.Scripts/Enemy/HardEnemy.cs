@@ -6,6 +6,8 @@ public class HardEnemy : Enemy
 {
     [SerializeField]
     private GameObject[] items;
+    [SerializeField]
+    private Transform TempParent;
     public override void Initialize()
     {
         ed.obj = gameObject;
@@ -18,6 +20,16 @@ public class HardEnemy : Enemy
     public override void Move()
     {
         base.Move();
+    }
+
+    public override void BulletCreate()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void SetTempParent(Transform trans)
+    {
+        TempParent = trans;
     }
 
     public override void Damage(float damage)

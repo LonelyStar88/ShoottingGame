@@ -22,17 +22,19 @@ public class Player : MonoBehaviour
     [SerializeField]
     private SpriteRenderer sr;
 
+    private float damage = 1f;
     private float speed = 3f;
-
     [SerializeField]
-    private Bullet bullet;
+    private Transform parent;
+    [SerializeField]
+    private MyBullet bullet;
     // Start is called before the first frame update
     void Start()
     {
         dir = Direction.Center;
         GetComponent<SpriteAnimation>().SetSprite(centerSP, 0.2f);
-
-        bullet.Initialize();
+        //InvokeRepeating("CreateBullet", 0.5f, 1f);
+        
     }
 
     // Update is called once per frame
@@ -59,23 +61,44 @@ public class Player : MonoBehaviour
         }
         
     }
-
+    public void CreateBullet()
+    {
+        MyBullet pb = Instantiate(bullet, transform);
+        pb.transform.localPosition = new Vector2(0f, 1f); //localPosition 은 탄환 자신의 포지션을 의미한다.
+        pb.SetTempParent(parent);
+        pb.SetDamage(damage);
+        pb.Initialize();
+    }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-       
-        if(collision.tag.Equals("eBullet"))
-        {
-            collision.GetComponent<EnemyParent>()
-                .posParentTrans.GetComponent<EnemyBullet>()
-                .RemoveBullet(collision.gameObject);
-            //collision.GetComponent<EnemyBullet>().RemoveBullet();
-        }
-        else if(collision.tag.Equals("Enemy"))
+        if(collision.tag.Equals("Enemy"))
         {
             
-            collision.GetComponent<EasyEnemy>();
-            return;
+            collision.GetComponent<Enemy>().Damage(10000);
+            //return;
             //Destroy(gameObject);
         }
+    }
+    public void Die()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
+        StartCoroutine(ReLife());
+        //gameObject.SetActive(false);
+    }
+
+    IEnumerator ReLife()
+    {
+        bool show = false;
+        yield return new WaitForSeconds(2f);
+        for(int i = 0; i < 10; i++)
+        {
+            GetComponent<SpriteRenderer>().enabled = !show;
+            yield return new WaitForSeconds(1f);
+            GetComponent<SpriteRenderer>().enabled = show;
+        }
+        gameObject.SetActive(true);
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<CapsuleCollider2D>().enabled = true;
     }
 }

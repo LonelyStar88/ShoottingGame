@@ -46,11 +46,8 @@ public class EnemyController : MonoBehaviour
     void SpawnEnemy()
     {
         Enemy enemy = Instantiate(enemys[(int)esd.type], points[esd.point].transform);
-        EnemyBullet eb = enemy.transform.GetChild(0).GetComponent<EnemyBullet>();
-        eb.SetTempParent(tempParent);
-        eb.SetEnemy(enemy.transform);
         enemy.Initialize();
-        eb.Initialize();
+        enemy.SetTempParent(tempParent);
         enemies.Add(enemy);
     }
 

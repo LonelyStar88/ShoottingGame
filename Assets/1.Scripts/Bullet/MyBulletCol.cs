@@ -16,8 +16,7 @@ public class MyBulletCol : MonoBehaviour
         {
             //collision.GetComponent<Enemy>().Damage(damage);
             GameObject.FindWithTag("Player")
-                .GetComponent<MyBullet>()
-                .RemoveBullet(gameObject);
+                .GetComponent<MyBullet>();
         }
     }
 }

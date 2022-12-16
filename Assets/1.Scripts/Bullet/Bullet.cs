@@ -7,7 +7,6 @@ public struct BulletData
     public float damage;
     public float speed;
     public float delay;
-    public bool isPlayer;
     
 
     public Transform parent;
@@ -24,11 +23,11 @@ public abstract class Bullet : MonoBehaviour
 
     public BulletData bd = new BulletData();
 
-    private List<GameObject> bullets = new List<GameObject>();
-    private float time = 0;
-
     public abstract void Initialize();
-    
+    public abstract void Move();
+    public abstract void RemoveBullet();
+
+    /*
     public virtual void CreateBullet()
     {
         GameObject obj = Instantiate(bd.prefab, bd.posParent);
@@ -46,6 +45,7 @@ public abstract class Bullet : MonoBehaviour
         obj.transform.SetParent(null);
         bullets.Add(obj);
     }
+    
     public virtual void Fire()
     {
         if (bullets.Count == 0)
@@ -95,6 +95,7 @@ public abstract class Bullet : MonoBehaviour
         }
     }
 
+    
     void Update()
     {
         if (bd.delay == 0)
@@ -103,10 +104,10 @@ public abstract class Bullet : MonoBehaviour
 
         if(time > bd.delay)
         {
-            CreateBullet();
+            //CreateBullet();
             time = 0;
         }
         Fire();
         
-    }
+    }*/
 }

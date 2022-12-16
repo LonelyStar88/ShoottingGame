@@ -44,9 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd51f1f7a247a8e40877403b869a427f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempParent: {fileID: 0}
-  parent: {fileID: 20640714577029226}
-  prefab: {fileID: 5065721252218836880, guid: 439842b55c4b4404a9f932a5c5f458ce, type: 3}
 --- !u!1 &1773029167622182906
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,6 +95,9 @@ MonoBehaviour:
   items:
   - {fileID: 3387178008216865173, guid: 9baabb28099ed414eb6f33dfc1c1bedd, type: 3}
   - {fileID: 4086379185081849064, guid: 2b34405b1b095df438ea5ab5ab2e57e0, type: 3}
+  firePosTrans: {fileID: 0}
+  bullet: {fileID: 5576014696165767457, guid: 439842b55c4b4404a9f932a5c5f458ce, type: 3}
+  TempParent: {fileID: 0}
 --- !u!212 &1773029167622182904
 SpriteRenderer:
   m_ObjectHideFlags: 0

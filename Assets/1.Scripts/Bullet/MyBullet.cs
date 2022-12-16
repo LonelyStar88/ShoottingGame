@@ -6,25 +6,50 @@ public class MyBullet : Bullet
 {
     [SerializeField]
     private Transform tempParent;
-    [SerializeField]
-    private Transform parent;
-    [SerializeField]
-    private GameObject prefab;
+
+    float damage = 0;
+
+    public void SetDamage(float damage)
+    {
+        this.damage = damage;
+    }
 
     public override void Initialize()
     {
         bd.damage = 1;
         bd.delay = 1f;
         bd.speed = 3f;
-        bd.posParent = parent;
-        bd.prefab = prefab;
-        bd.isPlayer = true;
         bd.tempParent = tempParent;
+
+       
     }
 
-    public override void RemoveBullet(GameObject bullet)
+    public override void Move()
     {
-        base.RemoveBullet(bullet);
+        transform.Translate(new Vector2(0f, Time.deltaTime * bd.speed));
     }
 
+
+    public override void RemoveBullet()
+    {
+        Destroy(gameObject);
+    }
+
+    public void SetTempParent(Transform trans)
+    {
+        tempParent = trans;
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("Enemy"))
+        {
+            collision.GetComponent<Enemy>().Damage(damage);
+            Destroy(gameObject);
+            
+        }
+    }
+
+    void Update() => Move();
+    
 }

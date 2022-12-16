@@ -20,6 +20,9 @@ public abstract class Enemy : MonoBehaviour
     public EnemyData ed = new EnemyData();
     public abstract void Initialize();
 
+    public abstract void BulletCreate();
+    public abstract void SetTempParent(Transform trans);
+
     public virtual void Move()
     {
         if (ed.speed == 0)
