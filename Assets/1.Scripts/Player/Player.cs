@@ -90,12 +90,13 @@ public class Player : MonoBehaviour
     IEnumerator ReLife()
     {
         bool show = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         for(int i = 0; i < 10; i++)
         {
             GetComponent<SpriteRenderer>().enabled = !show;
-            yield return new WaitForSeconds(1f);
-            GetComponent<SpriteRenderer>().enabled = show;
+            show = !show;
+            yield return new WaitForSeconds(0.1f);
+            
         }
         gameObject.SetActive(true);
         GetComponent<SpriteRenderer>().enabled = true;
