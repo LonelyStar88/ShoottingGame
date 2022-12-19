@@ -21,6 +21,8 @@ public abstract class Enemy : MonoBehaviour
     public abstract void Initialize();
 
     public abstract void BulletCreate();
+
+    public abstract void DropItem();
     public abstract void SetTempParent(Transform trans);
 
     public virtual void Move()
@@ -38,18 +40,9 @@ public abstract class Enemy : MonoBehaviour
             Delete();
         }
     }
-    
-    
-    public virtual void Damage(float damage)
-    {
-        ed.curHP -= damage;
 
-        if(ed.curHP <= 0)
-        {
-            Debug.Log("Æ÷ÀÎÆ® È¹µæ");
-            Delete();
-        }
-    }
+    public abstract void Damage(float damage);
+   
 
     void Delete()
     {

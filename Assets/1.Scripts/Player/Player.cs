@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     {
         dir = Direction.Center;
         GetComponent<SpriteAnimation>().SetSprite(centerSP, 0.2f);
-        //InvokeRepeating("CreateBullet", 0.5f, 1f);
+        InvokeRepeating("CreateBullet", 1f, 2f);
         
     }
 
@@ -75,8 +75,7 @@ public class Player : MonoBehaviour
         {
             
             collision.GetComponent<Enemy>().Damage(10000);
-            //return;
-            //Destroy(gameObject);
+            
         }
     }
     public void Die()
@@ -99,6 +98,7 @@ public class Player : MonoBehaviour
             
         }
         gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<CapsuleCollider2D>().enabled = true;
     }

@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6156522799302027996}
+  - component: {fileID: -4133903203925363374}
+  - component: {fileID: -7721410861751068090}
   - component: {fileID: 1314200140712886635}
   m_Layer: 0
   m_Name: Power (1)
@@ -32,6 +34,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4133903203925363374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4086379185081849064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28f80f4b928356445879a427e26a8d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 8033092973025764044, guid: 606e3127513c6c74d852755e18a67337, type: 3}
+  - {fileID: 4337684191699249041, guid: 606e3127513c6c74d852755e18a67337, type: 3}
+  - {fileID: -488721925442295091, guid: 606e3127513c6c74d852755e18a67337, type: 3}
+  - {fileID: -7573354855677281409, guid: 606e3127513c6c74d852755e18a67337, type: 3}
+  - {fileID: 1801263428120863714, guid: 606e3127513c6c74d852755e18a67337, type: 3}
+  - {fileID: -5971942374765049077, guid: 606e3127513c6c74d852755e18a67337, type: 3}
+  - {fileID: 4639506938558671751, guid: 606e3127513c6c74d852755e18a67337, type: 3}
+  - {fileID: -6099050445329199328, guid: 606e3127513c6c74d852755e18a67337, type: 3}
+  - {fileID: -7855203551248514480, guid: 606e3127513c6c74d852755e18a67337, type: 3}
+--- !u!114 &-7721410861751068090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4086379185081849064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52c76e55e29223428f31d24db66be07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &1314200140712886635
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -73,7 +109,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1801263428120863714, guid: 606e3127513c6c74d852755e18a67337, type: 3}
+  m_Sprite: {fileID: 8033092973025764044, guid: 606e3127513c6c74d852755e18a67337, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

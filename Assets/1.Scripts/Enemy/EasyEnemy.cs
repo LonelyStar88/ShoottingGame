@@ -14,12 +14,14 @@ public class EasyEnemy : Enemy
     private EnemyBullet bullet;
     [SerializeField]
     private Transform TempParent;
+    [SerializeField]
+    private HPController hpCont;
 
     public override void Initialize()
     {
         ed.obj = gameObject;
-        ed.curHP = 1f;
-        ed.maxHP = 1f;
+        ed.curHP = 5f;
+        ed.maxHP = 5f;
         ed.speed = 1f;
         ed.score = 1;
         ed.itemObjs = items;
@@ -36,14 +38,33 @@ public class EasyEnemy : Enemy
 
     public override void Damage(float damage)
     {
-        base.Damage(damage);
 
-        if(ed.curHP <= 0)
+        ed.curHP -= damage;
+        
+
+        if (ed.curHP <= 0)
         {
+            ed.curHP = 0;
             CancelInvoke("BulletCreate");
+            Debug.Log("Æ÷ÀÎÆ® È¹µæ");
+            DropItem();
+            Destroy(gameObject);
+            ed.obj = null;
+        
+        }
+        hpCont.SetRenderSize(ed.curHP, ed.maxHP);
+    }
+  
+
+    public override void DropItem()
+    {
+        int rand = Random.Range(0, 100);
+        if (rand < 100)
+        {
+            Transform trans = GameObject.Find("Items").transform;
+            Instantiate(items[Random.Range(0,2)], transform).transform.SetParent(trans);
         }
     }
-
     public override void BulletCreate()
     {
 
@@ -56,6 +77,6 @@ public class EasyEnemy : Enemy
     {
         TempParent = trans;
     }
-
    
+
 }

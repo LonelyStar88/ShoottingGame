@@ -7,6 +7,8 @@ public class EnemyBullet : Bullet
     private Transform tempParent;
 
     private Transform player = null;
+
+
     public override void Initialize()
     {
         bd.damage = 1;
@@ -41,6 +43,11 @@ public class EnemyBullet : Bullet
     {
         transform.Translate(new Vector2(0f, Time.deltaTime * (bd.speed * -1)));
 
+        if(transform.position.y < -10f)
+        {
+            RemoveBullet();
+        }
+
 
     }
 
@@ -52,6 +59,8 @@ public class EnemyBullet : Bullet
 
 
     void Update() => Move();
+
+   
 
     public void OnTriggerEnter2D(Collider2D collision)
     {

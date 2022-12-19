@@ -21,12 +21,17 @@ public class MyBullet : Bullet
         bd.speed = 3f;
         bd.tempParent = tempParent;
 
-       
+        transform.SetParent(bd.tempParent);
     }
 
     public override void Move()
     {
         transform.Translate(new Vector2(0f, Time.deltaTime * bd.speed));
+
+        if(transform.position.y > 7f)
+        {
+            RemoveBullet();
+        }
     }
 
 

@@ -26,12 +26,25 @@ public class NormalEnemy : Enemy
         throw new System.NotImplementedException();
     }
 
+    public override void DropItem()
+    {
+        throw new System.NotImplementedException();
+    }
     public override void SetTempParent(Transform trans)
     {
         TempParent = trans;
     }
     public override void Damage(float damage)
     {
-        base.Damage(damage);
+        ed.curHP -= damage;
+
+        if (ed.curHP <= 0)
+        {
+            //CancelInvoke("BulletCreate");
+            Debug.Log("Æ÷ÀÎÆ® È¹µæ");
+            Destroy(gameObject);
+            ed.obj = null;
+
+        }
     }
 }
