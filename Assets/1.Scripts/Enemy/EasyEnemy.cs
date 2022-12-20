@@ -20,8 +20,8 @@ public class EasyEnemy : Enemy
     public override void Initialize()
     {
         ed.obj = gameObject;
-        ed.curHP = 5f;
-        ed.maxHP = 5f;
+        ed.curHP = 2f;
+        ed.maxHP = 2f;
         ed.speed = 1f;
         ed.score = 1;
         ed.itemObjs = items;
@@ -45,8 +45,9 @@ public class EasyEnemy : Enemy
         if (ed.curHP <= 0)
         {
             ed.curHP = 0;
+            GameController.Instance.score += ed.score;
             CancelInvoke("BulletCreate");
-            Debug.Log("Æ÷ÀÎÆ® È¹µæ");
+            
             DropItem();
             Destroy(gameObject);
             ed.obj = null;
@@ -58,11 +59,13 @@ public class EasyEnemy : Enemy
 
     public override void DropItem()
     {
+        int itemIdx = Random.Range(0, items.Length);
         int rand = Random.Range(0, 100);
+        itemIdx = 1;
         if (rand < 100)
         {
             Transform trans = GameObject.Find("Items").transform;
-            Instantiate(items[Random.Range(0,2)], transform).transform.SetParent(trans);
+            Instantiate(items[itemIdx], transform).transform.SetParent(trans);
         }
     }
     public override void BulletCreate()

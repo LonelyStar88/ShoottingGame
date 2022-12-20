@@ -7,11 +7,11 @@ public class MyBullet : Bullet
     [SerializeField]
     private Transform tempParent;
 
-    float damage = 0;
+    
 
-    public void SetDamage(float damage)
+    public float Damage
     {
-        this.damage = damage;
+        get; set;
     }
 
     public override void Initialize()
@@ -23,7 +23,7 @@ public class MyBullet : Bullet
 
         transform.SetParent(bd.tempParent);
     }
-
+   
     public override void Move()
     {
         transform.Translate(new Vector2(0f, Time.deltaTime * bd.speed));
@@ -45,16 +45,8 @@ public class MyBullet : Bullet
         tempParent = trans;
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag.Equals("Enemy"))
-        {
-            collision.GetComponent<Enemy>().Damage(damage);
-            Destroy(gameObject);
-            
-        }
-    }
+
 
     void Update() => Move();
-    
+   
 }

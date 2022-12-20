@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - pBullet
   - eBullet
+  - Coin
+  - Power
+  - SubPlayer
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,7 @@ public class Power : Item
     public override void Initialize()
     {
         itemData.obj = gameObject;
-        itemData.speed = 1f;
+        itemData.speed = 3f;
     }
     // Start is called before the first frame update
     void Start()

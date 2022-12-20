@@ -44,7 +44,7 @@ public class HardEnemy : Enemy
         if (ed.curHP <= 0)
         {
             //CancelInvoke("BulletCreate");
-            Debug.Log("Æ÷ÀÎÆ® È¹µæ");
+            GameController.Instance.score += ed.score;
             Destroy(gameObject);
             ed.obj = null;
 
