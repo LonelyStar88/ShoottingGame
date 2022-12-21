@@ -6,6 +6,7 @@ public struct EnemyData
 {
     public GameObject obj;
 
+    public bool isBoss;
     public float speed;
     public float curHP;
     public float maxHP;
@@ -27,6 +28,9 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Move()
     {
+        if (ed.isBoss)
+            return;
+
         if (ed.speed == 0)
             return;
 

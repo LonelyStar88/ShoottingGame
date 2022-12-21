@@ -19,7 +19,9 @@ public class GameController : MonoBehaviour
     public int Iife = 3;
     public float power = 1f;
     public int score = 0;
+    public int boom = 3;
     public bool leftSub = false;
     public bool rightSub = false;
+    
   
 }

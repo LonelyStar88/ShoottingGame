@@ -19,6 +19,7 @@ public class EasyEnemy : Enemy
 
     public override void Initialize()
     {
+        ed.isBoss = false;
         ed.obj = gameObject;
         ed.curHP = 2f;
         ed.maxHP = 2f;
@@ -61,7 +62,7 @@ public class EasyEnemy : Enemy
     {
         int itemIdx = Random.Range(0, items.Length);
         int rand = Random.Range(0, 100);
-        itemIdx = 1;
+        //itemIdx = 1;
         if (rand < 100)
         {
             Transform trans = GameObject.Find("Items").transform;

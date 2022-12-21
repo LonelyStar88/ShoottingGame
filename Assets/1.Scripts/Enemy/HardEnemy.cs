@@ -6,16 +6,27 @@ public class HardEnemy : Enemy
 {
     [SerializeField]
     private GameObject[] items;
+
+    [HideInInspector]
+    public Transform firePosTrans;
+
+    [SerializeField]
+    private EnemyBullet bullet;
     [SerializeField]
     private Transform TempParent;
+    [SerializeField]
+    private HPController hpCont;
     public override void Initialize()
     {
+        ed.isBoss = false;
         ed.obj = gameObject;
         ed.curHP = 200f;
         ed.maxHP = 200f;
         ed.speed = 0.2f;
         ed.score = 50;
         ed.itemObjs = items;
+        firePosTrans = transform.GetChild(0).transform;
+        InvokeRepeating("BulletCreate", 2f, 1f); // BulleCreate 함수를2초뒤에 5초마다 실행
     }
     public override void Move()
     {
@@ -24,12 +35,21 @@ public class HardEnemy : Enemy
 
     public override void BulletCreate()
     {
-        throw new System.NotImplementedException();
+        EnemyBullet eb = Instantiate(bullet, firePosTrans);
+        eb.SetTempParent(TempParent);
+        eb.Initialize();
     }
 
     public override void DropItem()
     {
-        throw new System.NotImplementedException();
+        int itemIdx = Random.Range(0, items.Length);
+        int rand = Random.Range(0, 100);
+        //itemIdx = 1;
+        if (rand < 100)
+        {
+            Transform trans = GameObject.Find("Items").transform;
+            Instantiate(items[itemIdx], transform).transform.SetParent(trans);
+        }
     }
 
     public override void SetTempParent(Transform trans)

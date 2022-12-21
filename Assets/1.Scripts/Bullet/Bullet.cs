@@ -27,6 +27,8 @@ public abstract class Bullet : MonoBehaviour
     public abstract void Move();
     public abstract void RemoveBullet();
 
+    public abstract void SetTempParent(Transform trans);
+
     /*
     public virtual void CreateBullet()
     {

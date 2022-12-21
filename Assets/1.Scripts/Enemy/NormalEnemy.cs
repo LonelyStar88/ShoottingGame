@@ -19,12 +19,14 @@ public class NormalEnemy : Enemy
 
     public override void Initialize()
     {
+        ed.isBoss = false;
         ed.obj = gameObject;
         ed.curHP = 10f;
         ed.maxHP = 10f;
         ed.speed = 0.5f;
         ed.score = 10;
         ed.itemObjs = items;
+        firePosTrans = transform.GetChild(0).transform;
         InvokeRepeating("BulletCreate", 2f, 2f); // BulleCreate 함수를2초뒤에 5초마다 실행
     }
     public override void Move()
@@ -57,7 +59,7 @@ public class NormalEnemy : Enemy
     {
         int itemIdx = Random.Range(0, items.Length);
         int rand = Random.Range(0, 100);
-        itemIdx = 1;
+        //itemIdx = 1;
         if (rand < 100)
         {
             Transform trans = GameObject.Find("Items").transform;

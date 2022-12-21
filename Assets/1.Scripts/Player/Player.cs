@@ -17,16 +17,27 @@ public class Player : MonoBehaviour
     [SerializeField]private List<Sprite> leftSP;
     [SerializeField]private List<Sprite> rightSP;
     [SerializeField]private SpriteRenderer sr;
-    [SerializeField] private GameObject[] lifeObjs;
+    [SerializeField]private GameObject[] lifeObjs;
+    [SerializeField]private GameObject[] Booms;
 
     private float damage = 1f;
     private float speed = 3f;
+    private int nowbooms = 0;
     [SerializeField]private Transform parent;
     [SerializeField]private MyBullet bullet;
     private List<MyBullet> myBullets = new List<MyBullet>();
     // Start is called before the first frame update
     void Start()
     {
+        nowbooms = GameController.Instance.boom;
+        for (int i = 0; i < Booms.Length; i++)
+        {
+            Booms[i].SetActive(false);
+        }
+        for(int i = 0; i < nowbooms; i++)
+        {
+            Booms[i].SetActive(true);
+        }
         for(int i = 0; i< 10; i++)
         {
             myBullets.Add(Resources.Load<MyBullet>($"PlayerBullet/PlayerBullet {i+1}"));
@@ -35,7 +46,7 @@ public class Player : MonoBehaviour
 
         dir = Direction.Center;
         GetComponent<SpriteAnimation>().SetSprite(centerSP, 0.2f);
-        InvokeRepeating("CreateBullet", 0.5f, 1f);
+        InvokeRepeating("CreateBullet", 0.5f, 0.3f);
         
     }
 
@@ -46,10 +57,10 @@ public class Player : MonoBehaviour
             return;
         // 캐릭터 이동 범위 지정
         float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
-        float ClampX = Mathf.Clamp(transform.position.x + x, -2, 2);
+        float ClampX = Mathf.Clamp(transform.position.x + x, -3.4f, 3.4f);
         
         float y = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
-        float ClampY = Mathf.Clamp(transform.position.y + y, -4, 3);
+        float ClampY = Mathf.Clamp(transform.position.y + y, -4f, 4f);
         
         transform.position = new Vector3(ClampX, ClampY, 0);
         //transform.position += new Vector3(ClampY, -4f, 3f);
@@ -96,6 +107,11 @@ public class Player : MonoBehaviour
             bullet = myBullets[(int)GameController.Instance.power - 1];
             Destroy(collision.gameObject);
         }
+        else if(collision.tag.Equals("boom"))
+        {
+            GameController.Instance.boom++;
+            Destroy(collision.gameObject);
+        }
         else if(collision.tag.Equals("SubPlayer"))
         {
 
@@ -103,6 +119,7 @@ public class Player : MonoBehaviour
     }
     public void Die()
     {
+        CancelInvoke("CreateBullet");
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<CapsuleCollider2D>().enabled = false;
 
@@ -135,5 +152,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<CapsuleCollider2D>().enabled = true;
+        InvokeRepeating("CreateBullet", 0f, 0.3f);
     }
 }

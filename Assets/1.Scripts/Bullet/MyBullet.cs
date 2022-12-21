@@ -22,6 +22,8 @@ public class MyBullet : Bullet
         bd.tempParent = tempParent;
 
         transform.SetParent(bd.tempParent);
+
+        Destroy(gameObject, 7f);
     }
    
     public override void Move()
@@ -40,7 +42,7 @@ public class MyBullet : Bullet
         Destroy(gameObject);
     }
 
-    public void SetTempParent(Transform trans)
+    public override void SetTempParent(Transform trans)
     {
         tempParent = trans;
     }
@@ -48,5 +50,13 @@ public class MyBullet : Bullet
 
 
     void Update() => Move();
-   
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag.Equals("wall"))
+        {
+            RemoveBullet();
+        }
+    }
+
 }

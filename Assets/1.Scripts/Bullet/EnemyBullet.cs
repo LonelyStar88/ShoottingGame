@@ -13,7 +13,7 @@ public class EnemyBullet : Bullet
     {
         bd.damage = 1;
         bd.delay = 1f;
-        bd.speed = 3f;
+        bd.speed = 1.5f;
         bd.tempParent = tempParent;
         
         bd.posParent = transform;
@@ -34,7 +34,7 @@ public class EnemyBullet : Bullet
         transform.SetParent(tempParent);
     }
 
-    public void SetTempParent(Transform trans)
+    public override void SetTempParent(Transform trans)
     {
         tempParent = trans;
     }
@@ -67,6 +67,11 @@ public class EnemyBullet : Bullet
         if(collision.tag.Equals("Player"))
         {
             collision.GetComponent<Player>().Die();
+            RemoveBullet();
+        }
+        else if(collision.tag.Equals("wall"))
+        {
+            RemoveBullet();
         }
     }
 

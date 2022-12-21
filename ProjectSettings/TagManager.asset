@@ -10,6 +10,8 @@ TagManager:
   - Coin
   - Power
   - SubPlayer
+  - wall
+  - boom
   layers:
   - Default
   - TransparentFX

@@ -51,10 +51,11 @@ MonoBehaviour:
   items:
   - {fileID: 3387178008216865173, guid: 9baabb28099ed414eb6f33dfc1c1bedd, type: 3}
   - {fileID: 4086379185081849064, guid: 2b34405b1b095df438ea5ab5ab2e57e0, type: 3}
+  - {fileID: 3987652502737419796, guid: 22da2bfef4a1c4149b2ac87d8315d676, type: 3}
   firePosTrans: {fileID: 0}
-  bullet: {fileID: 0}
+  bullet: {fileID: 5576014696165767457, guid: 439842b55c4b4404a9f932a5c5f458ce, type: 3}
   TempParent: {fileID: 0}
-  hpCont: {fileID: 0}
+  hpCont: {fileID: 4596755520849849126}
 --- !u!212 &913951784042042989
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -151,6 +152,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 913951784042042986}
     m_Modifications:
+    - target: {fileID: 2522610317413948125, guid: 4e980783dee7f02489907919a48b5fba, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3740184207323928435, guid: 4e980783dee7f02489907919a48b5fba, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -158,6 +163,10 @@ PrefabInstance:
     - target: {fileID: 3740184207323928435, guid: 4e980783dee7f02489907919a48b5fba, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 3740184207323928435, guid: 4e980783dee7f02489907919a48b5fba, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3740184207323928435, guid: 4e980783dee7f02489907919a48b5fba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -199,12 +208,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5370158228610026912, guid: 4e980783dee7f02489907919a48b5fba, type: 3}
+      propertyPath: m_Color.b
+      value: 0.0543108
+      objectReference: {fileID: 0}
+    - target: {fileID: 5370158228610026912, guid: 4e980783dee7f02489907919a48b5fba, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5370158228610026912, guid: 4e980783dee7f02489907919a48b5fba, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7226090564571638991, guid: 4e980783dee7f02489907919a48b5fba, type: 3}
       propertyPath: m_Name
       value: HPController
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e980783dee7f02489907919a48b5fba, type: 3}
+--- !u!114 &4596755520849849126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7308110523023386300, guid: 4e980783dee7f02489907919a48b5fba, type: 3}
+  m_PrefabInstance: {fileID: 6530618609713565082}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f0440d47348da41a7198cb5316eaff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7585933958326115049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3740184207323928435, guid: 4e980783dee7f02489907919a48b5fba, type: 3}

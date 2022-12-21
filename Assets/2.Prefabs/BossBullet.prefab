@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1328624204142557029}
   - component: {fileID: 4665958990601896773}
   m_Layer: 0
-  m_Name: EnemyBullet
+  m_Name: BossBullet
   m_TagString: eBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5065721252218836880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd51f1f7a247a8e40877403b869a427f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5752c4fc11e5acf469557440f9cb1385, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &1328624204142557029
