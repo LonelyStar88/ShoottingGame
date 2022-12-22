@@ -17,6 +17,7 @@ public class Boss : Enemy
 
     [SerializeField]private List<Sprite> sprites;
     [SerializeField] private Sprite hitSprite;
+    [SerializeField] private List<Sprite> ExSprite;
 
     [SerializeField] private Transform partten1;
     public override void Initialize()
@@ -24,8 +25,8 @@ public class Boss : Enemy
 
         ed.obj = gameObject;
         ed.isBoss = true;
-        ed.curHP = 500f;
-        ed.maxHP = 500f;
+        ed.curHP = 100f;
+        ed.maxHP = 100f;
         ed.speed = 2f;
         ed.score = 5000;
         ed.itemObjs = items;
@@ -63,24 +64,34 @@ public class Boss : Enemy
         
         ed.curHP -= damage;
 
+        if(ed.curHP > 0)
+        {
+            GetComponent<SpriteAnimation>().SetSprite(hitSprite, sprites, 0.1f);
+        }
+
         if (ed.curHP <= 0)
         {
+            ed.curHP = 0;
             //CancelInvoke("BulletCreate");
             GameController.Instance.score += ed.score;
-            Destroy(gameObject);
+            CancelInvoke("BulletCreate");
+            CancelInvoke("BulletCreatePartten");
+            DropItem();
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<SpriteAnimation>().SetSprite(ExSprite, 0.1f, Delete);
             ed.obj = null;
 
         }
 
-        GetComponent<SpriteAnimation>().SetSprite(hitSprite, sprites, 0.1f);
+       
         hpCont.SetRenderSize(ed.curHP, ed.maxHP);
     }
 
     public override void DropItem()
     {
-        int itemIdx = Random.Range(0, items.Length);
+        //int itemIdx = Random.Range(0, items.Length);
         int rand = Random.Range(0, 100);
-        //itemIdx = 1;
+        int itemIdx = 2;
         if (rand < 100)
         {
             Transform trans = GameObject.Find("Items").transform;
@@ -102,6 +113,11 @@ public class Boss : Enemy
             ed.obj.transform.Translate(new Vector2(0f, Time.deltaTime * ed.speed * -1));
         }
         
+    }
+
+    void Delete()
+    {       
+        Destroy(gameObject);
     }
 }
    

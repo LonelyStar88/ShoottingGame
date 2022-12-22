@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class SpriteAnimation : MonoBehaviour
 {
-    private List<Sprite> sprites;
+    private List<Sprite> sprites = new List<Sprite>();
     private SpriteRenderer sr;
 
     private float spriteDelayTime;
     private float delayTime = 0f;
 
     private int spriteAnimationIndex = 0;
+
+    private UnityAction action = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,26 +34,53 @@ public class SpriteAnimation : MonoBehaviour
             delayTime = 0;
             sr.sprite = sprites[spriteAnimationIndex];
             spriteAnimationIndex++;
+
             if (spriteAnimationIndex > sprites.Count - 1)
             {
-                spriteAnimationIndex = 0;
+                if (action == null)
+                {
+                    spriteAnimationIndex = 0;
+                }
+                else
+                {
+                    sprites.Clear();
+                    action();
+                    action = null;
+                }
             }
         }
     }
-
+    void Init()
+    {
+        delayTime = 0f;
+        sprites.Clear();
+        spriteAnimationIndex = 0;
+    }
     public void SetSprite(List<Sprite> argsprites,float delayTime)
     {
-        spriteAnimationIndex = 0;
+        Init();
+        sprites = argsprites.ToList();
+        spriteDelayTime = delayTime;
+    }
+
+    public void SetSprite(List<Sprite> argsprites, float delayTime, UnityAction action)
+    {
+        Init();
+        this.action = action;
+        
+        
         sprites = argsprites.ToList();
         spriteDelayTime = delayTime;
     }
 
     public void SetSprite(Sprite sprite, List<Sprite> argsprites, float delayTime)
     {
-        sprites.Clear();
+        Init();
         sr.sprite = sprite;
         StartCoroutine(ReturnSprite(argsprites, delayTime));
     }
+
+    
 
     IEnumerator ReturnSprite(List<Sprite> argsprites, float delayTime)
     {

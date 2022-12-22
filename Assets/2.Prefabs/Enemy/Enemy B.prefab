@@ -51,9 +51,9 @@ MonoBehaviour:
   items:
   - {fileID: 3387178008216865173, guid: 9baabb28099ed414eb6f33dfc1c1bedd, type: 3}
   - {fileID: 4086379185081849064, guid: 2b34405b1b095df438ea5ab5ab2e57e0, type: 3}
-  - {fileID: 3987652502737419796, guid: 22da2bfef4a1c4149b2ac87d8315d676, type: 3}
+  - {fileID: 3987652502737419796, guid: 0188b8e349650734fa9122ddcfc8733d, type: 3}
   firePosTrans: {fileID: 0}
-  bullet: {fileID: 5576014696165767457, guid: 439842b55c4b4404a9f932a5c5f458ce, type: 3}
+  bullet: {fileID: 2179052062304698132, guid: 439842b55c4b4404a9f932a5c5f458ce, type: 3}
   TempParent: {fileID: 0}
   hpCont: {fileID: 4596755520849849126}
 --- !u!212 &913951784042042989

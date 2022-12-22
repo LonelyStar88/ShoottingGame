@@ -18,17 +18,19 @@ public class Player : MonoBehaviour
     [SerializeField]private List<Sprite> rightSP;
     [SerializeField]private SpriteRenderer sr;
     [SerializeField]private GameObject[] lifeObjs;
-    [SerializeField]private GameObject[] Booms;
+    //[SerializeField]private GameObject[] Booms;
+    [SerializeField] private Follower[] followers;
 
     private float damage = 1f;
     private float speed = 3f;
-    private int nowbooms = 0;
+    //private int nowbooms = 0;
     [SerializeField]private Transform parent;
     [SerializeField]private MyBullet bullet;
     private List<MyBullet> myBullets = new List<MyBullet>();
     // Start is called before the first frame update
     void Start()
     {
+        /*
         nowbooms = GameController.Instance.boom;
         for (int i = 0; i < Booms.Length; i++)
         {
@@ -37,7 +39,7 @@ public class Player : MonoBehaviour
         for(int i = 0; i < nowbooms; i++)
         {
             Booms[i].SetActive(true);
-        }
+        }*/
         for(int i = 0; i< 10; i++)
         {
             myBullets.Add(Resources.Load<MyBullet>($"PlayerBullet/PlayerBullet {i+1}"));
@@ -107,14 +109,27 @@ public class Player : MonoBehaviour
             bullet = myBullets[(int)GameController.Instance.power - 1];
             Destroy(collision.gameObject);
         }
+        /*
         else if(collision.tag.Equals("boom"))
         {
             GameController.Instance.boom++;
             Destroy(collision.gameObject);
-        }
+        }*/
         else if(collision.tag.Equals("SubPlayer"))
         {
+            Destroy(collision.gameObject);
 
+            foreach(var item in followers)
+            {
+                if(!item.IsOpen)
+                {
+                    item.IsOpen = true;
+                    item.DelayTime = 1f;
+                    item.gameObject.SetActive(true);
+                    break;
+                }
+               
+            }
         }
     }
     public void Die()
