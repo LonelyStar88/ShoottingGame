@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
 
     private List<Enemy> enemies = new List<Enemy>();
     private int temp = 0;
-    private int count = 0;
+   // private int count = 0;
 
     //private int temppointidx = 0;
 
@@ -65,10 +65,11 @@ public class EnemyController : MonoBehaviour
             esd.HP = 10;
             esd.point = Random.Range(0, points.Length - 1);
             esd.score = 10;
+        SpawnEnemyStart();
         
-        InvokeRepeating("SpawnEnemy", 0.5f, 1f);
     }
 
+    /*
     void changetype()
     {
         int rand = Random.Range(0, 100);
@@ -85,19 +86,43 @@ public class EnemyController : MonoBehaviour
             esd.type = EnemyType.Hard;
         }
     }
+    */
     
     void SpawnEnemy()
     {
-        if(count >0)
+        int rand = Random.Range(0, 100);
+        if (GameController.Instance.stage % GameController.BossSpawn != 0)
         {
-            changetype();
+            if (rand < 60)
+            {
+                esd.type = EnemyType.Easy;
+            }
+            else if (rand < 90)
+            {
+                esd.type = EnemyType.Normal;
+            }
+            else
+            {
+                esd.type = EnemyType.Hard;
+            }
         }
+        else
+        {
+            esd.type = EnemyType.Boss;
+            esd.point = 2;
+            SpawnEnemyStop();
+        }
+        /*
+        if (count >0)
+        {
+           // changetype();
+        }*/
         
         Enemy enemy = Instantiate(enemys[(int)esd.type], points[Random.Range(0, points.Length - 1)].transform);
         enemy.Initialize();
         enemy.SetTempParent(tempParent);
         enemies.Add(enemy);
-        count++;
+        //count++;
     }
 
     // Update is called once per frame
@@ -110,9 +135,22 @@ public class EnemyController : MonoBehaviour
         {
             item.Move();
            
-        }
+        }    
+    }
 
-        
-   
+    public void SpawnEnemyStart()
+    {
+        if (esd.type != EnemyType.Boss)
+        {
+            InvokeRepeating("SpawnEnemy", 2f, 3f);
+        }
+        else
+        {
+            Invoke("SpawnEnemy", 3f);
+        }
+    }
+    public void SpawnEnemyStop()
+    {
+        CancelInvoke("SpawnEnemy");
     }
 }

@@ -13,8 +13,8 @@ public class Follower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
-        InvokeRepeating("CreateBullet", 1f, DelayTime);
+
+        StartBullet();
     }
 
     // Update is called once per frame
@@ -24,4 +24,17 @@ public class Follower : MonoBehaviour
         bul.SetTempParent(tempParent);
         bul.Initialize();
     }
+
+    public void StartBullet()
+    {
+        gameObject.SetActive(true);
+        InvokeRepeating("CreateBullet", 1f, DelayTime);
+    }
+
+    public void StopBullet()
+    {
+        CancelInvoke("CreateBullet");
+        gameObject.SetActive(false);
+    }
+
 }

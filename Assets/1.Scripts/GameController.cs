@@ -10,18 +10,41 @@ public enum GamePlayType
 }
 public class GameController : MonoBehaviour
 {
+    public EnemyController enemyCont;
     public static GameController Instance;
 
     void Awake() => Instance = this;
 
     public GamePlayType playtype = GamePlayType.Play;
 
-    public int Iife = 3;
-    public float power = 1f;
-    public int score = 0;
-    public int boom = 3;
-    public bool leftSub = false;
-    public bool rightSub = false;
-    
-  
+    public int Life { get; set; }
+    public float power { get; set; }
+    public int Score { get; set; }
+
+    public const int BossSpawn = 3;
+
+    public int stage { get; set; }
+    float time = 0;
+    //public int boom = 3;
+
+    void Start()
+    {
+        Life = 3;
+        power = 1;
+        Score = 0;
+        stage = 0;
+    }
+    void Update()
+    {
+        if (stage % BossSpawn == 0)
+            return;
+
+        time += Time.deltaTime;
+        if(time > 10)
+        {
+            time = 0;
+            stage++;
+        }
+    }
+
 }

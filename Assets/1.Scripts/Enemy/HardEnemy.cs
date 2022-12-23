@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class HardEnemy : Enemy
 {
-    [SerializeField]
-    private GameObject[] items;
+    
 
     [HideInInspector]
     public Transform firePosTrans;
 
     [SerializeField]
     private EnemyBullet bullet;
-    [SerializeField]
-    private Transform TempParent;
-    [SerializeField]
-    private HPController hpCont;
+    
+    
+   
     public override void Initialize()
     {
         ed.isBoss = false;
         ed.obj = gameObject;
-        ed.curHP = 200f;
-        ed.maxHP = 200f;
+        ed.curHP = 50f;
+        ed.maxHP = 50f;
         ed.speed = 0.2f;
         ed.score = 50;
         ed.itemObjs = items;
@@ -42,32 +40,22 @@ public class HardEnemy : Enemy
 
     public override void DropItem()
     {
-        int itemIdx = Random.Range(0, items.Length);
-        int rand = Random.Range(0, 100);
-        //itemIdx = 1;
-        if (rand < 100)
-        {
-            Transform trans = GameObject.Find("Items").transform;
-            Instantiate(items[itemIdx], transform).transform.SetParent(trans);
-        }
+        base.DropItem();
     }
 
     public override void SetTempParent(Transform trans)
     {
-        TempParent = trans;
+        base.SetTempParent(trans);
     }
 
     public override void Damage(float damage)
     {
         ed.curHP -= damage;
 
-        if (ed.curHP <= 0)
+        if (ed.curHP > 0)
         {
-            //CancelInvoke("BulletCreate");
-            GameController.Instance.score += ed.score;
-            Destroy(gameObject);
-            ed.obj = null;
-
+            GetComponent<SpriteAnimation>().SetSprite(hitSprite, sprites, 0.1f);
         }
+        base.Damage(damage);
     }
 }

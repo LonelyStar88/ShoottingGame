@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class NormalEnemy : Enemy
 {
-    [SerializeField]
-    private GameObject[] items;
+   
 
     [HideInInspector]
     public Transform firePosTrans;
 
     [SerializeField]
     private EnemyBullet bullet;
-    [SerializeField]
-    private Transform TempParent;
-    [SerializeField]
-    private HPController hpCont;
+    
+   
 
     public override void Initialize()
     {
@@ -39,19 +36,11 @@ public class NormalEnemy : Enemy
 
         ed.curHP -= damage;
 
-
-        if (ed.curHP <= 0)
+        if (ed.curHP > 0)
         {
-            ed.curHP = 0;
-            GameController.Instance.score += ed.score;
-            CancelInvoke("BulletCreate");
-
-            DropItem();
-            Destroy(gameObject);
-            ed.obj = null;
-
+            GetComponent<SpriteAnimation>().SetSprite(hitSprite, sprites, 0.1f);
         }
-        hpCont.SetRenderSize(ed.curHP, ed.maxHP);
+        base.Damage(damage);
     }
 
 

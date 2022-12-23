@@ -23,7 +23,7 @@ public class MyBullet : Bullet
 
         transform.SetParent(bd.tempParent);
 
-        Destroy(gameObject, 7f);
+        
     }
    
     public override void Move()

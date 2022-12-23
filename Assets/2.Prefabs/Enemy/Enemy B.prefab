@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 913951784042042986}
+  - component: {fileID: 1636706855199146583}
   - component: {fileID: 913951784042042988}
   - component: {fileID: 913951784042042989}
   - component: {fileID: 7761645989343126971}
@@ -36,6 +37,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1636706855199146583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913951784042042991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52c76e55e29223428f31d24db66be07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &913951784042042988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,10 +65,19 @@ MonoBehaviour:
   - {fileID: 3387178008216865173, guid: 9baabb28099ed414eb6f33dfc1c1bedd, type: 3}
   - {fileID: 4086379185081849064, guid: 2b34405b1b095df438ea5ab5ab2e57e0, type: 3}
   - {fileID: 3987652502737419796, guid: 0188b8e349650734fa9122ddcfc8733d, type: 3}
+  hpCont: {fileID: 4596755520849849126}
+  sprites: []
+  ExSprite:
+  - {fileID: 5986030973748356752, guid: 54eba9c24be4c474180c23dcccfd6630, type: 3}
+  - {fileID: -5600206312213581617, guid: 54eba9c24be4c474180c23dcccfd6630, type: 3}
+  - {fileID: 3815954189206336483, guid: 54eba9c24be4c474180c23dcccfd6630, type: 3}
+  - {fileID: -3690502768834906923, guid: 54eba9c24be4c474180c23dcccfd6630, type: 3}
+  - {fileID: -49130668184793455, guid: 54eba9c24be4c474180c23dcccfd6630, type: 3}
+  - {fileID: -2330519403281856691, guid: 54eba9c24be4c474180c23dcccfd6630, type: 3}
+  hitSprite: {fileID: -7844560889915226194, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  TempParent: {fileID: 0}
   firePosTrans: {fileID: 0}
   bullet: {fileID: 2179052062304698132, guid: 439842b55c4b4404a9f932a5c5f458ce, type: 3}
-  TempParent: {fileID: 0}
-  hpCont: {fileID: 4596755520849849126}
 --- !u!212 &913951784042042989
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
         }
         else if(collision.tag.Equals("Coin"))
         {
-            GameController.Instance.score += 100;
+            GameController.Instance.Score += 100;
             Destroy(collision.gameObject);
         }
         else if(collision.tag.Equals("Power"))
@@ -134,18 +134,29 @@ public class Player : MonoBehaviour
     }
     public void Die()
     {
+        //GameController.Instance.playtype = GamePlayType.Pause;
         CancelInvoke("CreateBullet");
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<CapsuleCollider2D>().enabled = false;
 
-        GameController.Instance.Iife--;
-
-        if(GameController.Instance.Iife >= 0)
+        foreach (var item in followers)
         {
-            lifeObjs[GameController.Instance.Iife].SetActive(false);
+            if (item.IsOpen)
+            {
+                item.gameObject.SetActive(false);
+                item.StopBullet();
+                //item.CancelInvoke("CreateBullet");
+            }
+        }
+
+        int life = --GameController.Instance.Life;
+
+        if(life >= 0)
+        {
+            lifeObjs[life].SetActive(false);
         }
         StartCoroutine(ReLife());
-        if (GameController.Instance.Iife < 0)
+        if (life < 0)
         {
             GameController.Instance.playtype = GamePlayType.Stop;
         }
@@ -164,6 +175,14 @@ public class Player : MonoBehaviour
             
         }
         gameObject.SetActive(true);
+
+            foreach(var item in followers)
+            {
+                if(item.IsOpen)
+                {
+                    item.StartBullet();
+                }
+            }
         yield return new WaitForSeconds(0.5f);
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<CapsuleCollider2D>().enabled = true;

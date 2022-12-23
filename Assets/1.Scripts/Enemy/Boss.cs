@@ -5,19 +5,15 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
-    [SerializeField]
-    private GameObject[] items;
+   
 
     [HideInInspector]
     public Transform firePosTrans;
 
     [SerializeField]private BossBullet bullet;
-    [SerializeField]private Transform TempParent;
-    [SerializeField]private HPController hpCont;
-
-    [SerializeField]private List<Sprite> sprites;
-    [SerializeField] private Sprite hitSprite;
-    [SerializeField] private List<Sprite> ExSprite;
+    
+    
+    
 
     [SerializeField] private Transform partten1;
     public override void Initialize()
@@ -39,7 +35,7 @@ public class Boss : Enemy
     {
         Initialize();
         
-        InvokeRepeating("BulletCreatePartten", 3f, 0.2f);
+        InvokeRepeating("BulletCreatePartten", 3f, 0.5f);
     }
     void Update()
     {
@@ -61,62 +57,45 @@ public class Boss : Enemy
 
     public override void Damage(float damage)
     {
-        
         ed.curHP -= damage;
 
-        if(ed.curHP > 0)
+        if (ed.curHP > 0)
         {
             GetComponent<SpriteAnimation>().SetSprite(hitSprite, sprites, 0.1f);
         }
-
-        if (ed.curHP <= 0)
+        else
         {
-            ed.curHP = 0;
-            //CancelInvoke("BulletCreate");
-            GameController.Instance.score += ed.score;
-            CancelInvoke("BulletCreate");
             CancelInvoke("BulletCreatePartten");
-            DropItem();
-            GetComponent<BoxCollider2D>().enabled = false;
-            GetComponent<SpriteAnimation>().SetSprite(ExSprite, 0.1f, Delete);
-            ed.obj = null;
-
         }
+        base.Damage(damage);
 
-       
-        hpCont.SetRenderSize(ed.curHP, ed.maxHP);
     }
 
     public override void DropItem()
     {
-        //int itemIdx = Random.Range(0, items.Length);
-        int rand = Random.Range(0, 100);
-        int itemIdx = 2;
-        if (rand < 100)
-        {
-            Transform trans = GameObject.Find("Items").transform;
-            Instantiate(items[itemIdx], transform).transform.SetParent(trans);
-        }
+        base.DropItem();
     }
 
     
 
     public override void SetTempParent(Transform trans)
     {
-        TempParent = trans;
+        base.SetTempParent(trans);
     }
 
     void BossMove()
     {
         if(transform.position.y >= 2)
         {
-            ed.obj.transform.Translate(new Vector2(0f, Time.deltaTime * ed.speed * -1));
+            transform.Translate(new Vector2(0f, Time.deltaTime * ed.speed * -1));
         }
         
     }
 
     void Delete()
-    {       
+    {
+        GameController.Instance.stage += 1;
+        GameController.Instance.enemyCont.SpawnEnemyStart();
         Destroy(gameObject);
     }
 }

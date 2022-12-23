@@ -18,13 +18,32 @@ public struct EnemyData
 }
 public abstract class Enemy : MonoBehaviour
 {
+
     public EnemyData ed = new EnemyData();
+    public GameObject[] items;
+    public HPController hpCont;
+    public List<Sprite> sprites;
+    public List<Sprite> ExSprite;
+    public Sprite hitSprite;
+    public Transform TempParent;
     public abstract void Initialize();
 
     public abstract void BulletCreate();
 
-    public abstract void DropItem();
-    public abstract void SetTempParent(Transform trans);
+    public virtual void DropItem()
+    {
+        int rand = Random.Range(0, 100);
+        int itemIdx = Random.Range(0, items.Length);
+        if (rand < 100)
+        {
+            Transform trans = GameObject.Find("Items").transform;
+            Instantiate(items[itemIdx], transform).transform.SetParent(trans);
+        }
+    }
+    public virtual void SetTempParent(Transform trans)
+    {
+        TempParent = trans;
+    }
 
     public virtual void Move()
     {
@@ -45,7 +64,28 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public abstract void Damage(float damage);
+    public virtual void Damage(float damage)
+    {
+        ed.curHP -= damage;
+
+        if (ed.curHP > 0)
+        {
+            GetComponent<SpriteAnimation>().SetSprite(hitSprite, sprites, 0.1f);
+        }
+        else
+        {
+            ed.curHP = 0;
+            GameController.Instance.Score += ed.score;
+            CancelInvoke("BulletCreate");
+
+            DropItem();
+            Destroy(gameObject);
+            ed.obj = null;
+
+        }
+        hpCont.SetRenderSize(ed.curHP, ed.maxHP);
+    }
+
    
 
     void Delete()
